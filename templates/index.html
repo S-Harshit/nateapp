@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Bridge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <h1>VoiceTranslatioinator</h1>
+
+    <h6>Speech Translator and Keyword Generator</h6>
+    <br>
+
+    <form id="speechForm" method="post">
+
+        <label for="src_lang_code">Choose source language:</label>
+        <select id="src_lang_code" name="src_lang">
+            <option value="English">English</option>
+            <option value="Hindi">Hindi</option>
+            <option value="German">German</option>
+            <option value="French">French</option>
+            <option value="Spanish">Spanish</option>
+            <option value="Arabic">Arabic</option>
+            <option value="Italian">Italian</option>
+            <option value="Russian">Russian</option>
+            <option value="Gujarati">Gujarati</option>
+            <option value="Marathi">Marathi</option>
+        </select>
+
+        <br><br>
+
+        <label for="tar_lang">Choose target language:</label>
+        <select id="tar_lang" name="tar_lang">
+            <option value="English">English</option>
+            <option value="Hindi" selected>Hindi</option>
+            <option value="German">German</option>
+            <option value="French">French</option>
+            <option value="Spanish">Spanish</option>
+            <option value="Arabic">Arabic</option>
+            <option value="Italian">Italian</option>
+            <option value="Russian">Russian</option>
+            <option value="Gujarati">Gujarati</option>
+            <option value="Marathi">Marathi</option>
+        </select>
+
+        <p class="gender-select">Choose gender for target language:
+        </p>
+        <input type="radio" checked id="gender1" value="M" name="gender">
+        <label for="gender1">M</label>
+        &nbsp;&nbsp;
+        <input type="radio" id="gender2" value="F" name="gender">
+        <label for="gender2">F</label>
+        <br>
+
+    </form>
+
+    <button id="speak-btn">Start Listening</button>
+    <div class="listening">
+        <canvas></canvas>
+
+    </div>
+    <script>
+
+        const speakBtn = document.getElementById("speak-btn");
+        speakBtn.addEventListener("click", () => {
+            speakBtn.textContent = "Listening....";
+
+            const canvas = document.querySelector('canvas');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            class Wave {
+                constructor(
+                    canv,
+                    maxAmplitude = 80,
+                    length = 100,
+                    frequency = 8,
+                    bgOpacity = 0.09,
+                    y = 200,
+                ) {
+                    this.canvas = canv;
+                    this.ctx = this.canvas.getContext('2d');
+                    this.maxAmplitude = maxAmplitude;
+                    this.amplitude = 0;
+                    this.length = length;
+                    this.frequency = frequency;
+                    this.increment = Math.random() * 360;
+                    this.bgOpacity = bgOpacity;
+                    this.y = y || this.canvas.height / 2;
+
+                    this.frameCallback = () => {
+                        this.draw(this.ctx);
+                        requestAnimationFrame(this.frameCallback);
+                    };
+                }
+
+                draw(c) {
+                    c.beginPath();
+                    this.ctx.fillStyle = `rgba(38,50,56,${this.bgOpacity})`;
+                    this.ctx.strokeStyle = `hsl(${this.increment * 195}, 94.6%, 63.7%)`;
+                    c.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                    c.moveTo(0, this.canvas.height / 2);
+
+                    for (let i = 0; i < this.canvas.width; i += 1) {
+                        c.lineTo(
+                            i,
+                            this.y + Math.sin(i / this.length + this.increment) * this.amplitude,
+                        );
+                    }
+
+                    c.stroke();
+                    c.closePath();
+
+                    this.amplitude = Math.sin(this.increment) * this.maxAmplitude;
+                    this.increment -= this.frequency / 1000;
+                }
+
+                animate() {
+                    this.frameCallback();
+                }
+            }
+
+            const wave = new Wave(canvas, 150, 200, -8);
+
+
+            wave.animate();
+            const form = document.querySelector("#speechForm").style.display = "none";
+            const description = document.querySelector("h6").innerText = "The microphone will keep on listening as long as you speaking.";
+            //heading change
+            const heading = document.querySelector("h1");
+            text = "Listening"
+            heading.innerText = text;
+            function headingLoader() {
+                let dots = ["."];
+                setInterval(() => {
+                    console.log("interval");
+                    if (dots.length < 3) {
+                        dots.map((dot) => {
+                            heading.innerText += dot;
+                        });
+                        dots.push(".");
+                    } else {
+                        dots.pop();
+                        dots.pop();
+                        heading.innerText = text;
+                    }
+                }, 1000)
+            }
+            headingLoader();
+
+
+
+
+            //cat image code
+            const listen = document.querySelector(".listening");
+            const image = document.createElement("img");
+            image.setAttribute("src", "..\\static\\microphoneON.gif");
+            image.setAttribute("alt", "cat with microphone");
+            image.classList = ["cat-img"];
+            listen.appendChild(image)
+
+
+
+        })
+
+    </script>
+</body>
+
+</html>

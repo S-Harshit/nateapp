@@ -1,0 +1,138 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    align-items: center;
+    text-align: center;
+    background-color: rgb(38, 50, 56);
+    color: white;
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+canvas {
+    background-color: rgb(38, 50, 56);
+}
+
+/* Style for labels */
+h1 {
+    color: rgb(75, 207, 250)
+}
+
+label {
+    margin: 10px 0;
+}
+
+/* Style for select elements */
+select {
+    /* padding: 5px;
+    margin: 10px 0; */
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    width: 80px;
+    /* height: 30px; */
+}
+
+/* Style for radio buttons */
+input[type="radio"] {
+    margin: 10px 5px;
+    width: 25px;
+    /* height: 25px; */
+}
+
+/* Style for submit button */
+button {
+    background-color: rgb(59, 85, 96);
+    color: rgb(75, 207, 250);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+button:hover {
+    color: #FFF;
+}
+
+/* Style for submit button hover */
+button[type="submit"]:hover {
+    background-color: #2b4265cd;
+}
+
+/* Style for submit in result.html */
+input[type=submit] {
+    background-color: #4c74af;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    /* height: 40px; */
+    width: 120px;
+    font-weight: bold
+}
+
+input[type="submit"]:hover {
+    background-color: #2b4265cd;
+}
+
+ul {
+    list-style: circle;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.cat-img {
+    position: absolute;
+    z-index: 2;
+    left: 38%;
+    top: 38%;
+    width: 12em;
+    height: 12em;
+    border-radius: 50%;
+    margin: 1em auto;
+}
+
+@media(max-width:47em) {
+    body {
+        font-size: 20px;
+        text-align: center
+    }
+
+    .gender-select {
+        display: block;
+        width: 100%;
+    }
+
+    .cat-img {
+        position: absolute;
+        z-index: 2;
+        left: 20%;
+        top: 38%;
+        width: 12em;
+        height: 12em;
+        border-radius: 50%;
+        margin: 1em auto;
+    }
+
+}
