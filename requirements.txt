@@ -1,0 +1,5 @@
+azure-cognitiveservices-speech
+azure-ai-ml
+azure-identity
+azure-ai-textanalytics
+Flask
